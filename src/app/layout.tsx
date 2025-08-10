@@ -68,7 +68,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: 'https://abulhasnat.dev',
+    url: 'https://www.iamhasnat.com',
     title: 'Abul Hasnat - Software Engineering Team Lead | AWS Expert',
     description:
       'Experienced Software Engineering Team Lead specializing in serverless technologies, AWS cloud solutions, and full-stack development. 5+ years building scalable applications.',
@@ -120,8 +120,8 @@ export default function RootLayout({
     jobTitle: 'Software Engineering Team Lead',
     description:
       'Experienced Software Engineering Team Lead specializing in serverless applications, AWS cloud solutions, and full-stack development.',
-    url: 'https://abulhasnat.dev',
-    image: 'https://abulhasnat.dev/favicon-512.svg',
+    url: 'https://www.iamhasnat.com',
+    image: 'https://www.iamhasnat.com/favicon-512.svg',
     sameAs: [
       'https://github.com/ahshimul',
       'https://www.linkedin.com/in/a-hasnat-shimul',
