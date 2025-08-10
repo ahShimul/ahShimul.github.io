@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Menu, X, Download, Sun, Moon } from 'lucide-react';
@@ -21,6 +21,7 @@ export function Navigation() {
   const [activeSection, setActiveSection] = useState('home');
   const { theme, setTheme, resolvedTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
+  const navRef = useRef<HTMLElement>(null);
 
   const downloadCV = () => {
     const link = document.createElement('a');
@@ -34,6 +35,40 @@ export function Navigation() {
   useEffect(() => {
     setMounted(true);
   }, []);
+
+  // Close mobile menu when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (navRef.current && !navRef.current.contains(event.target as Node)) {
+        setIsOpen(false);
+      }
+    };
+
+    if (isOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isOpen]);
+
+  // Close mobile menu on escape key
+  useEffect(() => {
+    const handleEscape = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setIsOpen(false);
+      }
+    };
+
+    if (isOpen) {
+      document.addEventListener('keydown', handleEscape);
+    }
+
+    return () => {
+      document.removeEventListener('keydown', handleEscape);
+    };
+  }, [isOpen]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -83,6 +118,7 @@ export function Navigation() {
 
   return (
     <motion.nav
+      ref={navRef}
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
@@ -218,13 +254,33 @@ export function Navigation() {
               variant='ghost'
               size='sm'
               onClick={() => setIsOpen(!isOpen)}
-              className='p-2'
+              className='p-2 hover:bg-secondary/80'
+              aria-label={isOpen ? 'Close menu' : 'Open menu'}
+              aria-expanded={isOpen}
             >
-              {isOpen ? (
-                <X className='h-5 w-5' />
-              ) : (
-                <Menu className='h-5 w-5' />
-              )}
+              <AnimatePresence mode='wait'>
+                {isOpen ? (
+                  <motion.div
+                    key='close'
+                    initial={{ rotate: -90, opacity: 0 }}
+                    animate={{ rotate: 0, opacity: 1 }}
+                    exit={{ rotate: 90, opacity: 0 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <X className='h-5 w-5' />
+                  </motion.div>
+                ) : (
+                  <motion.div
+                    key='menu'
+                    initial={{ rotate: 90, opacity: 0 }}
+                    animate={{ rotate: 0, opacity: 1 }}
+                    exit={{ rotate: -90, opacity: 0 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <Menu className='h-5 w-5' />
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </Button>
           </div>
         </div>
@@ -237,9 +293,10 @@ export function Navigation() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className='md:hidden bg-background/95 backdrop-blur-md border-t border-border/20'
+            transition={{ duration: 0.3 }}
+            className='md:hidden bg-background/95 backdrop-blur-md border-t border-border/20 absolute top-full left-0 right-0 z-50'
           >
-            <div className='px-2 pt-2 pb-3 space-y-1'>
+            <div className='px-4 py-4 space-y-2'>
               {navItems.map((item) => (
                 <motion.a
                   key={item.name}
@@ -247,13 +304,17 @@ export function Navigation() {
                   onClick={(e) => {
                     e.preventDefault();
                     scrollToSection(item.href);
+                    setIsOpen(false);
                   }}
-                  className={`block px-3 py-2 text-base font-medium rounded-md transition-colors ${
+                  className={`block px-4 py-3 text-base font-medium rounded-lg transition-colors ${
                     activeSection === item.href.substring(1)
-                      ? 'text-primary bg-primary/10'
-                      : 'text-foreground/70 hover:text-primary hover:bg-secondary/50'
+                      ? 'text-primary bg-primary/10 border border-primary/20'
+                      : 'text-foreground/70 hover:text-primary hover:bg-secondary/80'
                   }`}
-                  whileTap={{ scale: 0.95 }}
+                  whileTap={{ scale: 0.98 }}
+                  initial={{ x: -20, opacity: 0 }}
+                  animate={{ x: 0, opacity: 1 }}
+                  transition={{ delay: 0.1 }}
                 >
                   {item.name}
                 </motion.a>
@@ -262,8 +323,11 @@ export function Navigation() {
                 <Button
                   variant='outline'
                   size='sm'
-                  className='w-full bg-primary text-primary-foreground border-0'
-                  onClick={downloadCV}
+                  className='w-full bg-primary text-primary-foreground border-0 hover:bg-primary/90'
+                  onClick={() => {
+                    downloadCV();
+                    setIsOpen(false);
+                  }}
                 >
                   <Download className='w-4 h-4 mr-2' />
                   Download Resume
