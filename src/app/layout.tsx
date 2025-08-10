@@ -1,31 +1,59 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
 import { ThemeProvider } from '@/components/theme-provider';
 
 const inter = Inter({ subsets: ['latin'] });
 
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
+  themeColor: [
+    { media: '(prefers-color-scheme: light)', color: '#ffffff' },
+    { media: '(prefers-color-scheme: dark)', color: '#0a0a0a' },
+  ],
+};
+
 export const metadata: Metadata = {
-  title: 'Abul Hasnat - Software Engineering Team Lead',
+  metadataBase: new URL('https://www.iamhasnat.com'),
+  title: {
+    default: 'Abul Hasnat - Software Engineering Team Lead | AWS Expert',
+    template: '%s | Abul Hasnat - Software Engineering Team Lead',
+  },
   description:
-    'Software Engineering Team Lead with 5+ years of experience in serverless applications and AWS cloud solutions. Passionate about building scalable architectures and leading development teams.',
+    'Experienced Software Engineering Team Lead specializing in serverless applications, AWS cloud solutions, and full-stack development. 5+ years building scalable microservices with Node.js, React, and TypeScript. Based in Dhaka, Bangladesh.',
   keywords: [
     'Software Engineer',
     'Team Lead',
-    'AWS',
-    'Serverless',
-    'Lambda',
+    'AWS Expert',
+    'Serverless Computing',
+    'AWS Lambda',
     'DynamoDB',
-    'Node.js',
-    'React',
+    'Node.js Developer',
+    'React Developer',
     'TypeScript',
     'Full Stack Developer',
-    'Cloud Solutions',
-    'Dhaka',
-    'Bangladesh',
+    'Cloud Architecture',
+    'Microservices',
+    'DevOps',
+    'Software Architecture',
+    'Team Leadership',
+    'Agile Development',
+    'RESTful APIs',
+    'Frontend Development',
+    'Backend Development',
+    'Dhaka Bangladesh',
+    'Remote Developer',
+    'Portfolio',
   ],
-  authors: [{ name: 'Abul Hasnat' }],
+  authors: [{ name: 'Abul Hasnat', url: 'https://www.iamhasnat.com' }],
   creator: 'Abul Hasnat',
+  publisher: 'Abul Hasnat',
+  alternates: {
+    canonical: 'https://www.iamhasnat.com',
+  },
   icons: {
     icon: [
       { url: '/favicon.ico', sizes: '16x16', type: 'image/x-icon' },
@@ -41,28 +69,43 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'en_US',
     url: 'https://abulhasnat.dev',
-    title: 'Abul Hasnat - Software Engineering Team Lead',
+    title: 'Abul Hasnat - Software Engineering Team Lead | AWS Expert',
     description:
-      'Software Engineering Team Lead specializing in serverless technologies and AWS cloud solutions',
-    siteName: 'Abul Hasnat Portfolio',
+      'Experienced Software Engineering Team Lead specializing in serverless technologies, AWS cloud solutions, and full-stack development. 5+ years building scalable applications.',
+    siteName: 'Abul Hasnat - Portfolio',
     images: [
       {
         url: '/favicon-512.svg',
         width: 512,
         height: 512,
-        alt: 'Abul Hasnat - AH Logo',
+        alt: 'Abul Hasnat - Software Engineering Team Lead Logo',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Abul Hasnat - Software Engineering Team Lead',
+    title: 'Abul Hasnat - Software Engineering Team Lead | AWS Expert',
     description:
-      'Software Engineering Team Lead specializing in serverless technologies and AWS cloud solutions',
+      'Experienced Software Engineering Team Lead specializing in serverless technologies, AWS cloud solutions, and full-stack development.',
     images: ['/favicon-512.svg'],
+    creator: '@abulhasnat', // Add your Twitter handle here
   },
-  viewport: 'width=device-width, initial-scale=1',
-  robots: 'index, follow',
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+  verification: {
+    google: 'your-google-verification-code', // Add your Google Search Console verification code
+    // yandex: 'your-yandex-verification-code', // Add if needed
+    // bing: 'your-bing-verification-code', // Add if needed
+  },
 };
 
 export default function RootLayout({
@@ -70,8 +113,52 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const structuredData = {
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    name: 'Abul Hasnat',
+    jobTitle: 'Software Engineering Team Lead',
+    description:
+      'Experienced Software Engineering Team Lead specializing in serverless applications, AWS cloud solutions, and full-stack development.',
+    url: 'https://abulhasnat.dev',
+    image: 'https://abulhasnat.dev/favicon-512.svg',
+    sameAs: [
+      'https://github.com/ahshimul',
+      'https://www.linkedin.com/in/a-hasnat-shimul',
+    ],
+    address: {
+      '@type': 'PostalAddress',
+      addressLocality: 'Dhaka',
+      addressCountry: 'Bangladesh',
+    },
+    knowsAbout: [
+      'Software Engineering',
+      'Team Leadership',
+      'AWS',
+      'Serverless Computing',
+      'Node.js',
+      'React',
+      'TypeScript',
+      'Full Stack Development',
+      'Cloud Architecture',
+      'Microservices',
+    ],
+    worksFor: {
+      '@type': 'Organization',
+      name: 'Software Engineering Team Lead',
+    },
+  };
+
   return (
     <html lang='en' suppressHydrationWarning>
+      <head>
+        <script
+          type='application/ld+json'
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(structuredData),
+          }}
+        />
+      </head>
       <body className={inter.className}>
         <ThemeProvider>{children}</ThemeProvider>
       </body>

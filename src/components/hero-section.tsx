@@ -163,20 +163,22 @@ export function HeroSection() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className='text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold mb-6 leading-tight'
           >
+            <span className='sr-only'>Abul Hasnat - </span>
             Hi, I&rsquo;m{' '}
             <span className='bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent whitespace-nowrap'>
               Abul Hasnat
             </span>
           </motion.h1>
 
-          <motion.div
+          <motion.h2
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
             className='text-2xl sm:text-3xl lg:text-4xl font-semibold mb-6 h-16'
+            aria-label='Professional titles'
           >
             <TypewriterText texts={typewriterTexts} />
-          </motion.div>
+          </motion.h2>
 
           <motion.p
             initial={{ opacity: 0, y: 20 }}

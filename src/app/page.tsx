@@ -6,28 +6,52 @@ import { ProjectsSection } from '@/components/projects-section';
 import { ExperienceSection } from '@/components/experience-section';
 import { ContactSection } from '@/components/contact-section';
 import { Footer } from '@/components/footer';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Home - Abul Hasnat | Software Engineering Team Lead',
+  description:
+    "Welcome to Abul Hasnat's portfolio. Experienced Software Engineering Team Lead specializing in serverless applications, AWS cloud solutions, and full-stack development with 5+ years of experience.",
+  alternates: {
+    canonical: 'https://www.iamhasnat.com',
+  },
+};
 
 export default function Home() {
   return (
     <>
       <Navigation />
       <main className='min-h-screen'>
-        <section id='home'>
+        {/* Hero Section - Introduction */}
+        <section id='home' aria-label='Introduction and overview'>
           <HeroSection />
         </section>
-        <section id='about'>
+
+        {/* About Section - Personal background */}
+        <section id='about' aria-label='About Abul Hasnat'>
           <AboutSection />
         </section>
-        <section id='skills'>
+
+        {/* Skills Section - Technical expertise */}
+        <section id='skills' aria-label='Technical skills and technologies'>
           <SkillsSection />
         </section>
-        <section id='projects'>
+
+        {/* Projects Section - Portfolio showcase */}
+        <section id='projects' aria-label='Featured projects and work'>
           <ProjectsSection />
         </section>
-        <section id='experience'>
+
+        {/* Experience Section - Professional background */}
+        <section
+          id='experience'
+          aria-label='Professional experience and career'
+        >
           <ExperienceSection />
         </section>
-        <section id='contact'>
+
+        {/* Contact Section - Get in touch */}
+        <section id='contact' aria-label='Contact information and form'>
           <ContactSection />
         </section>
       </main>

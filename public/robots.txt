@@ -1,0 +1,17 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://www.iamhasnat.com/sitemap.xml
+
+# Allow all crawlers access to CSS and JS files
+User-agent: *
+Allow: /_next/static/
+Allow: /favicon.ico
+Allow: /favicon.svg
+Allow: /favicon-512.svg
+
+# Disallow crawling of private or unnecessary paths
+Disallow: /api/
+Disallow: /_next/
+Disallow: /404
