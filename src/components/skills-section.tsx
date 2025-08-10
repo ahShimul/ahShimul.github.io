@@ -204,7 +204,7 @@ export function SkillsSection() {
               })}
             </TabsList>
 
-            {skillCategories.map((category, categoryIndex) => (
+            {skillCategories.map((category) => (
               <TabsContent key={category.id} value={category.id}>
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}

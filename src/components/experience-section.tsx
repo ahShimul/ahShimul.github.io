@@ -143,7 +143,7 @@ export function ExperienceSection() {
             variants={containerVariants}
             className='space-y-12'
           >
-            {experiences.map((experience, index) => (
+            {experiences.map((experience) => (
               <motion.div
                 key={experience.id}
                 variants={itemVariants}

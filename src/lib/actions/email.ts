@@ -2,14 +2,6 @@
 
 import emailjs from '@emailjs/nodejs';
 
-interface EmailData {
-  from_name: string;
-  from_email: string;
-  subject: string;
-  message: string;
-  to_name: string;
-}
-
 export async function sendEmail(formData: FormData) {
   try {
     const serviceId = process.env.EMAILJS_SERVICE_ID;

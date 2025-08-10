@@ -83,11 +83,10 @@ const socialLinks = [
 
 export function ContactSection() {
   const [isPending, startTransition] = useTransition();
-  const [message, setMessage] =
-    useState<{
-      type: 'success' | 'error';
-      text: string;
-    } | null>(null);
+  const [message, setMessage] = useState<{
+    type: 'success' | 'error';
+    text: string;
+  } | null>(null);
 
   const handleSubmit = async (formData: FormData) => {
     startTransition(async () => {
@@ -126,14 +125,14 @@ export function ContactSection() {
             variants={itemVariants}
             className='text-3xl sm:text-4xl font-bold mb-4 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent'
           >
-            Let's Work Together
+            Let&rsquo;s Work Together
           </motion.h2>
           <motion.p
             variants={itemVariants}
             className='text-lg text-muted-foreground max-w-2xl mx-auto'
           >
-            Ready to bring your next project to life? Let's discuss how I can
-            help you build amazing serverless solutions.
+            Ready to bring your next project to life? Let&rsquo;s discuss how I
+            can help you build amazing serverless solutions.
           </motion.p>
         </motion.div>
 
@@ -150,8 +149,8 @@ export function ContactSection() {
               <CardHeader className='p-0 mb-6'>
                 <CardTitle className='text-2xl'>Get In Touch</CardTitle>
                 <p className='text-muted-foreground'>
-                  I'm always open to discussing new opportunities, interesting
-                  projects, or potential collaborations.
+                  I&rsquo;m always open to discussing new opportunities,
+                  interesting projects, or potential collaborations.
                 </p>
               </CardHeader>
 
@@ -233,7 +232,8 @@ export function ContactSection() {
               <CardHeader className='p-0 mb-6'>
                 <CardTitle className='text-2xl'>Send a Message</CardTitle>
                 <p className='text-muted-foreground'>
-                  Drop me a line and I'll get back to you as soon as possible.
+                  Drop me a line and I&rsquo;ll get back to you as soon as
+                  possible.
                 </p>
               </CardHeader>
 

@@ -163,7 +163,7 @@ export function HeroSection() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className='text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold mb-6 leading-tight'
           >
-            Hi, I'm{' '}
+            Hi, I&rsquo;m{' '}
             <span className='bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent whitespace-nowrap'>
               Abul Hasnat
             </span>
@@ -201,10 +201,10 @@ export function HeroSection() {
             <br />
             My goal?{' '}
             <strong className='font-bold tracking-wide'>
-              To ship software that works so well, you'll forget how much work
-              went into it
+              To ship software that works so well, you&rsquo;ll forget how much
+              work went into it
             </strong>
-            … and that's exactly how it should be.
+            … and that&rsquo;s exactly how it should be.
           </motion.p>
 
           <motion.div
