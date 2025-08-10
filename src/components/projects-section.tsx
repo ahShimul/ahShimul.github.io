@@ -43,6 +43,7 @@ const projects = [
       'Serverless microservices architecture',
       'Admin dashboard with analytics',
     ],
+    link: 'https://taxtranscriptpro.com',
   },
   {
     id: 2,
@@ -58,6 +59,7 @@ const projects = [
       'Cost optimization alerts',
       'Multi-environment deployment',
     ],
+    link: 'https://www.taxontrack.us',
   },
   {
     id: 3,
@@ -74,6 +76,7 @@ const projects = [
       'Version control integration',
       'AI-powered insights',
     ],
+    link: 'https://componly.co',
   },
   {
     id: 4,
@@ -91,6 +94,7 @@ const projects = [
       'AI powered customer support',
       'AI powered email notifications',
     ],
+    link: 'https://trucktalk.io',
   },
 ];
 
@@ -193,21 +197,14 @@ export function ProjectsSection() {
                   </div>
 
                   <div className='flex gap-3 pt-4'>
-                    <Button
-                      size='sm'
-                      variant='outline'
-                      className='flex-1 border-border/50 hover:bg-secondary/80'
-                    >
-                      <Github className='w-4 h-4 mr-2' />
-                      Code
-                    </Button>
-                    <Button
-                      size='sm'
-                      className='flex-1 bg-primary hover:bg-primary/90'
+                    <a
+                      target='_blank'
+                      href={project.link}
+                      className='flex-1 bg-primary hover:bg-primary/90 flex items-center justify-center py-2 rounded-md'
                     >
                       <ExternalLink className='w-4 h-4 mr-2' />
-                      Demo
-                    </Button>
+                      Visit Site
+                    </a>
                   </div>
                 </CardContent>
               </Card>

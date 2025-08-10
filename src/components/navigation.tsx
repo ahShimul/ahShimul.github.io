@@ -19,7 +19,7 @@ export function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
-  const { theme, setTheme } = useTheme();
+  const { theme, setTheme, resolvedTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
   const downloadCV = () => {
@@ -68,7 +68,13 @@ export function Navigation() {
   };
 
   const toggleTheme = () => {
-    setTheme(theme === 'dark' ? 'light' : 'dark');
+    if (theme === 'system') {
+      setTheme('light');
+    } else if (theme === 'light') {
+      setTheme('dark');
+    } else {
+      setTheme('system');
+    }
   };
 
   if (!mounted) {
@@ -142,7 +148,7 @@ export function Navigation() {
               className='p-2 relative overflow-hidden'
             >
               <AnimatePresence mode='wait'>
-                {theme === 'dark' ? (
+                {resolvedTheme === 'dark' ? (
                   <motion.div
                     key='sun'
                     initial={{ y: -20, opacity: 0 }}
@@ -185,7 +191,7 @@ export function Navigation() {
               className='p-2 relative overflow-hidden'
             >
               <AnimatePresence mode='wait'>
-                {theme === 'dark' ? (
+                {resolvedTheme === 'dark' ? (
                   <motion.div
                     key='sun-mobile'
                     initial={{ y: -20, opacity: 0 }}
