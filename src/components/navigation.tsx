@@ -25,7 +25,7 @@ export function Navigation() {
 
   const downloadCV = () => {
     const link = document.createElement('a');
-    link.href = '/Abul_Hasnat_CV.pdf'; // Make sure to place your CV PDF in the public folder as 'cv.pdf'
+    link.href = '/Abul_Hasnat_CV.pdf';
     link.download = 'Abul_Hasnat_CV.pdf';
     document.body.appendChild(link);
     link.click();
@@ -95,11 +95,29 @@ export function Navigation() {
   }, []);
 
   const scrollToSection = (href: string) => {
-    const element = document.querySelector(href);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-      setIsOpen(false);
-    }
+    // Close mobile menu first
+    setIsOpen(false);
+
+    // Small delay to allow menu animation to complete
+    setTimeout(() => {
+      const sectionId = href.substring(1);
+      const element = document.getElementById(sectionId);
+
+      if (element) {
+        // Calculate offset for fixed header
+        const headerOffset = 80;
+        const elementPosition = element.offsetTop;
+        const offsetPosition = elementPosition - headerOffset;
+
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: 'smooth',
+        });
+
+        // Update active section immediately
+        setActiveSection(sectionId);
+      }
+    }, 100);
   };
 
   const toggleTheme = () => {
@@ -131,29 +149,21 @@ export function Navigation() {
         <div className='flex items-center justify-between h-16'>
           {/* Logo */}
           <motion.div whileHover={{ scale: 1.05 }} className='flex-shrink-0'>
-            <a
-              href='#home'
-              onClick={(e) => {
-                e.preventDefault();
-                scrollToSection('#home');
-              }}
+            <button
+              onClick={() => scrollToSection('#home')}
               className='text-xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent'
             >
               Abul Hasnat
-            </a>
+            </button>
           </motion.div>
 
           {/* Desktop Navigation */}
           <div className='hidden md:block'>
             <div className='ml-10 flex items-baseline space-x-8'>
               {navItems.map((item) => (
-                <motion.a
+                <motion.button
                   key={item.name}
-                  href={item.href}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    scrollToSection(item.href);
-                  }}
+                  onClick={() => scrollToSection(item.href)}
                   className={`relative px-3 py-2 text-sm font-medium transition-colors ${
                     activeSection === item.href.substring(1)
                       ? 'text-primary'
@@ -170,7 +180,7 @@ export function Navigation() {
                       initial={false}
                     />
                   )}
-                </motion.a>
+                </motion.button>
               ))}
             </div>
           </div>
@@ -294,19 +304,14 @@ export function Navigation() {
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3 }}
-            className='md:hidden bg-background/95 backdrop-blur-md border-t border-border/20 absolute top-full left-0 right-0 z-50'
+            className='md:hidden bg-background/95 backdrop-blur-md border-t border-border/20 absolute top-full left-0 right-0 z-50 shadow-lg'
           >
-            <div className='px-4 py-4 space-y-2'>
-              {navItems.map((item) => (
-                <motion.a
+            <div className='px-4 py-4 space-y-2 max-h-screen overflow-y-auto'>
+              {navItems.map((item, index) => (
+                <motion.button
                   key={item.name}
-                  href={item.href}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    scrollToSection(item.href);
-                    setIsOpen(false);
-                  }}
-                  className={`block px-4 py-3 text-base font-medium rounded-lg transition-colors ${
+                  onClick={() => scrollToSection(item.href)}
+                  className={`w-full text-left px-4 py-3 text-base font-medium rounded-lg transition-all duration-200 ${
                     activeSection === item.href.substring(1)
                       ? 'text-primary bg-primary/10 border border-primary/20'
                       : 'text-foreground/70 hover:text-primary hover:bg-secondary/80'
@@ -314,10 +319,10 @@ export function Navigation() {
                   whileTap={{ scale: 0.98 }}
                   initial={{ x: -20, opacity: 0 }}
                   animate={{ x: 0, opacity: 1 }}
-                  transition={{ delay: 0.1 }}
+                  transition={{ delay: index * 0.05, duration: 0.2 }}
                 >
                   {item.name}
-                </motion.a>
+                </motion.button>
               ))}
               <div className='pt-4 border-t border-border/20'>
                 <Button
