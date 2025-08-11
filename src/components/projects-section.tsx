@@ -60,25 +60,7 @@ const projects = [
       'Multi-environment deployment',
     ],
     link: 'https://www.taxontrack.us',
-  },
-  {
-    id: 4,
-    title: 'Trucktalk',
-    description:
-      'A real-time TMS application for tracking and managing truck shipments.',
-    technologies: ['Nest.js', 'MongoDB', 'Vapi', 'ConvexDB'],
-    category: 'Backend',
-    status: 'Completed',
-    features: [
-      'Real-time shipment tracking',
-      'Automated notifications & alerts',
-      'Route optimization & planning',
-      'Analytics dashboard for fleet management',
-      'AI powered customer support',
-      'AI powered email notifications',
-    ],
-    link: 'https://trucktalk.io',
-  },
+  }
 ];
 
 export function ProjectsSection() {
