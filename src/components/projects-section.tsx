@@ -62,23 +62,6 @@ const projects = [
     link: 'https://www.taxontrack.us',
   },
   {
-    id: 3,
-    title: 'Componly Design System Analyzer',
-    description:
-      'A tool for analyzing and visualizing design system components and their usage across applications.',
-    technologies: ['Node.js', 'Nest.js', 'AWS', 'Route53', 'CloudFront'],
-    category: 'Backend',
-    status: 'Production',
-    features: [
-      'Component usage analytics',
-      'Design token visualization',
-      'Cross-application component tracking',
-      'Version control integration',
-      'AI-powered insights',
-    ],
-    link: 'https://componly.co',
-  },
-  {
     id: 4,
     title: 'Trucktalk',
     description:
